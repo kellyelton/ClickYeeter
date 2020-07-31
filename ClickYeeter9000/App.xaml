@@ -1,0 +1,8 @@
+﻿<Application x:Class="ClickYeeter9000.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClickYeeter9000">
+    <Application.Resources>
+
+    </Application.Resources>
+</Application>
