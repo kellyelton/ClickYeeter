@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClickYeeter9000" xmlns:converters="clr-namespace:ClickYeeter9000.Converters"
+        xmlns:local="clr-namespace:ClickYeeter9000"
+        xmlns:converters="clr-namespace:ClickYeeter9000.Converters"
+        xmlns:controls="clr-namespace:ClickYeeter9000.Controls"
         mc:Ignorable="d"
         Title="Click Yeeter 9000"
         MinHeight="450"
@@ -39,14 +41,15 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid ClipToBounds="False">
-        <Border Background="{Binding Theme.Background}"
-                CornerRadius="4"
-                ClipToBounds="True"
-                Margin="1.4">
+        <controls:GlowBorder
+            x:Name="MainBorder"
+            Style="{StaticResource AccentBorder}"
+            Background="{Binding Theme.Background}"
+            >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Border CornerRadius="5 5 0 0">
                     <Border.Clip>
@@ -126,13 +129,15 @@
                         </Border>
                     </Grid>
                 </Border>
-                <Grid Grid.Row="1" Margin="10 3 6 3">
+                <Grid Grid.Row="1" Margin="12 8 12 8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="v1.2.3.4" Foreground="#345469"/>
+                    <TextBlock Text="v1.2.3.4"
+                               Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
+                               Foreground="#345469"/>
                     <Rectangle Width="1"
                                Stroke="{Binding Path=Theme.BorderColor}"
                                Height="10"
@@ -188,11 +193,6 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-        </Border>
-        <Border
-            Style="{StaticResource AccentBorder}"
-            Background="{Binding Theme.Border}"
-            Panel.ZIndex="-1">
-        </Border>
+        </controls:GlowBorder>
     </Grid>
 </Window>

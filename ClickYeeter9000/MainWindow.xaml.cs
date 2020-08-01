@@ -7,6 +7,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace ClickYeeter9000
 {
@@ -41,7 +42,43 @@ namespace ClickYeeter9000
 
             clickYeeter.PropertyChanged += ClickYeeter_PropertyChanged;
             clickYeeter.Recorder.PropertyChanged += Recorder_PropertyChanged;
+        }
 
+        private Storyboard _fadeBorderInStoryboard;
+        private Storyboard _fadeBorderOutStoryboard;
+
+        protected override void OnActivated(EventArgs e) {
+            _fadeBorderOutStoryboard?.Stop();
+
+            var sb = new Storyboard();
+            var anim = new DoubleAnimation(0.2, 1, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
+            sb.Children.Add(anim);
+
+            Storyboard.SetTarget(sb, MainBorder);
+            Storyboard.SetTargetProperty(sb, new PropertyPath("BorderOpacity"));
+
+            sb.Begin();
+
+            _fadeBorderInStoryboard = sb;
+
+            base.OnActivated(e);
+        }
+
+        protected override void OnDeactivated(EventArgs e) {
+            _fadeBorderInStoryboard?.Stop();
+
+            var sb = new Storyboard();
+            var anim = new DoubleAnimation(1, 0.2, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
+            sb.Children.Add(anim);
+
+            Storyboard.SetTarget(sb, MainBorder);
+            Storyboard.SetTargetProperty(sb, new PropertyPath("BorderOpacity"));
+
+            sb.Begin();
+
+            _fadeBorderOutStoryboard = sb;
+
+            base.OnDeactivated(e);
         }
 
         private void ClickYeeter_PropertyChanged(object sender, PropertyChangedEventArgs e) {

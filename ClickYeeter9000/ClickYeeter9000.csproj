@@ -130,7 +130,9 @@
     <Compile Include="Components\IEvent.cs" />
     <Compile Include="Components\Events\MouseDoubleClickEvent.cs" />
     <Compile Include="Components\Record.cs" />
+    <Compile Include="Controls\GlowBorder.cs" />
     <Compile Include="Converters\BorderClipConverter.cs" />
+    <Compile Include="Converters\DoubleBoosterConverter.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Components\Recorder.cs" />
@@ -161,6 +163,10 @@
     <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="YeetOverlay.xaml">
       <SubType>Designer</SubType>
@@ -222,9 +228,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Harpy.1.0.7213.50727\build\net40\Harpy.targets" Condition="Exists('..\packages\Harpy.1.0.7213.50727\build\net40\Harpy.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
