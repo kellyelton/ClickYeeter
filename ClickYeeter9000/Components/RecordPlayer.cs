@@ -49,20 +49,35 @@ namespace ClickYeeter9000.Components
         }
 
         private void Start() {
-            _clickTimer.Enabled = true;
+            lock (_sync) {
+                if (_isStarted) return;
+
+                _isStarted = true;
+
+                _clickTimer.Enabled = true;
+            }
         }
 
         private void Stop() {
-            _clickTimer.Enabled = false;
+            lock (_sync) {
+                if (!_isStarted) return;
+
+                _isStarted = false;
+
+                _clickTimer.Enabled = false;
+            }
         }
 
         Record _previousRecord;
         DateTime _startTime;
         int _lastEvent = -1;
         bool _inClick;
+        bool _isStarted;
 
         private void ClickTimerElapsed(object sender, ElapsedEventArgs e) {
             lock (_sync) {
+                if (!_isStarted) return;
+
                 _clickTimer.Enabled = false;
 
                 if (_inClick) return;
@@ -111,7 +126,9 @@ namespace ClickYeeter9000.Components
             lock (_sync) {
                 _inClick = false;
 
-                _clickTimer.Enabled = true;
+                if (_isStarted) {
+                    _clickTimer.Enabled = true;
+                }
             }
         }
     }
