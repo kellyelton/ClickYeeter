@@ -128,6 +128,9 @@
     <Compile Include="Components\Events\MouseDoubleClickEvent.cs" />
     <Compile Include="Components\Record.cs" />
     <Compile Include="Components\RecordPlayer.cs" />
+    <Compile Include="Controls\ControlButton.xaml.cs">
+      <DependentUpon>ControlButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GlowBorder.cs" />
     <Compile Include="Converters\BorderClipConverter.cs" />
     <Compile Include="Converters\DoubleBoosterConverter.cs" />
@@ -142,6 +145,10 @@
     <Compile Include="YeetOverlay.xaml.cs">
       <DependentUpon>YeetOverlay.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ControlButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
