@@ -18,11 +18,12 @@
                         <converters:BorderClipConverter x:Key="BorderClipConverter"/>
                     </ControlTemplate.Resources>
                     <Grid Margin="{TemplateBinding Margin}">
-                        <!--<Border Background="{TemplateBinding BorderBrush}"
+                        <Border Background="{TemplateBinding BorderBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
                                 Opacity="{Binding BorderOpacity, RelativeSource={RelativeSource TemplatedParent}}"
+                                Margin="-0.5"
                         >
                             <Border.Effect>
                                 <BlurEffect
@@ -30,19 +31,12 @@
                                     KernelType="Gaussian"
                                     RenderingBias="Quality"
                                     />
-                                --><!--<DropShadowEffect
-                                    BlurRadius="3"
-                                    ShadowDepth="0"
-                                    Opacity="0.8"
-                                    RenderingBias="Quality"
-                                    Color="{StaticResource AccentColor}"/>--><!--
                             </Border.Effect>
-                        </Border>-->
-                        <Border
+                        </Border>
+                        <Border Background="{TemplateBinding BorderBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
-                                Background="{TemplateBinding BorderBackground}"
                                 Opacity="{Binding BorderOpacity, RelativeSource={RelativeSource TemplatedParent}}"
                         >
                             <Border.Effect>

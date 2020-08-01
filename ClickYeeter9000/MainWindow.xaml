@@ -9,9 +9,8 @@
         mc:Ignorable="d"
         Title="Click Yeeter 9000"
         MinHeight="450"
-        MinWidth="400"
         Height="450"
-        Width="400"
+        Width="300"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -38,11 +37,13 @@
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard Storyboard="{StaticResource FlashAccentOpacity}"/>
+            <!--<BeginStoryboard Storyboard="{StaticResource FadeInWindow}"/>-->
         </EventTrigger>
     </Window.Triggers>
     <Grid ClipToBounds="False">
         <controls:GlowBorder
             x:Name="MainBorder"
+            Margin="5"
             Style="{StaticResource AccentBorder}"
             Background="{Binding Theme.Background}"
             BorderBackground="{StaticResource BorderBrush}"
@@ -77,14 +78,14 @@
                                                                           Storyboard.TargetProperty="Margin"
                                                                           >
                                             <EasingThicknessKeyFrame KeyTime="00:00:16"
-                                                                     Value="-320 -400 0 0"
+                                                                     Value="-220 -400 0 0"
                                                                      >
                                                 <EasingThicknessKeyFrame.EasingFunction>
                                                     <BackEase Amplitude="0.5" EasingMode="EaseInOut" />
                                                 </EasingThicknessKeyFrame.EasingFunction>
                                             </EasingThicknessKeyFrame>
                                             <EasingThicknessKeyFrame KeyTime="00:00:24"
-                                                                     Value="-320 -360 0 0"
+                                                                     Value="-220 -360 0 0"
                                                                      >
                                             </EasingThicknessKeyFrame>
                                             <EasingThicknessKeyFrame KeyTime="00:00:28"
@@ -117,9 +118,9 @@
                         </Grid.RowDefinitions>
                         <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10"/>
                         <Border Grid.Row="1"
-                                Background="#AA040815"
+                                Background="#AA020202"
                                 Margin="10 0 10 10"
-                                CornerRadius="2"
+                                CornerRadius="4"
                                 Padding="10">
                             <StackPanel>
                                 <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>

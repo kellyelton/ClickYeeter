@@ -9,7 +9,7 @@
     <Color x:Key="AccentColor">Red</Color>
     <SolidColorBrush
         x:Key="BorderBrush"
-        Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.3}"
+        Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
         Color="{StaticResource AccentColor}" />
 
     <Style x:Key="AccentBorder"
