@@ -8,8 +8,7 @@
         xmlns:controls="clr-namespace:ClickYeeter9000.Controls"
         mc:Ignorable="d"
         Title="Click Yeeter 9000"
-        MinHeight="450"
-        Height="450"
+        Height="170"
         Width="300"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
@@ -116,11 +115,12 @@
                             <RowDefinition Height="120"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10"/>
+                        <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10" Opacity="1"/>
                         <Border Grid.Row="1"
                                 Background="#AA020202"
                                 Margin="10 0 10 10"
                                 CornerRadius="4"
+                                Visibility="Collapsed"
                                 Padding="10">
                             <StackPanel>
                                 <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>
@@ -150,7 +150,30 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Stretch"
                                 Orientation="Horizontal">
-                        <Grid Width="10" Height="10">
+                        <TextBlock Text="⚙️" Foreground="#333333" FontSize="12" Margin="0 -1 10 0" Cursor="Hand">
+                            <TextBlock.Resources>
+                                <Storyboard x:Key="Hover">
+                                    <ColorAnimation From="#333333" To="#47C3FF" Duration="00:00:0.25" FillBehavior="HoldEnd" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </TextBlock.Resources>
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard x:Name="StartHover">
+                                            <StaticResource ResourceKey="Hover"/>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <StopStoryboard BeginStoryboardName="StartHover"/>
+
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
+                        <Grid Width="12" Height="12">
                             <Grid>
                                 <Ellipse Fill="#111111"
                                      HorizontalAlignment="Stretch"
