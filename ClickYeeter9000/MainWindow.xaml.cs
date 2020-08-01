@@ -106,6 +106,8 @@ namespace ClickYeeter9000
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e) {
+            FocusManager.SetFocusedElement(this, this);
+
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
