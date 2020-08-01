@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClickYeeter9000"
+        xmlns:local="clr-namespace:ClickYeeter9000" xmlns:converters="clr-namespace:ClickYeeter9000.Converters"
         mc:Ignorable="d"
         Title="Click Yeeter 9000"
         MinHeight="450"
-        MinWidth="500"
+        MinWidth="400"
         Height="450"
-        Width="500"
+        Width="400"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -31,119 +31,168 @@
             <Setter Property="Padding" Value="2"/>
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:BorderClipConverter x:Key="BorderClipConverter"/>
     </Window.Resources>
-    <Border Background="{Binding Theme.Background}"
-            CornerRadius="4">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="{Binding Theme.Border}"
-                    BorderThickness="1.2"
-                    Opacity="0.2"
-                    Margin="-0.1"
-                    Panel.ZIndex="10"
-                    CornerRadius="4">
-                <Border.Effect>
-                    <DropShadowEffect
-                        BlurRadius="5"
-                        ShadowDepth="0"
-                        Opacity="1"
-                        RenderingBias="Quality"
-                        Color="{Binding Theme.BorderColor}"/>
-                </Border.Effect>
-
-            </Border>
-            <Image x:Name="image_jpg"
-                   Source="Resources/Themes/Default/splash.png"
-                   Stretch="UniformToFill"
-                   Margin="-220 -360 0 0"
-                   HorizontalAlignment="Left"
-                   Opacity="0.1"
-                   Width="1200"/>
-            <Border>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10"/>
-                    <Border Grid.Row="1"
-                            Background="#AA040815"
-                            Margin="10 0 10 10"
-                            CornerRadius="2"
-                            Padding="10">
-                        <StackPanel>
-                            <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>
-                            <TextBox Style="{StaticResource Input}" Text="{Binding Path=Settings.RecordHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleRecordHotKeyTextBox_KeyDown" IsReadOnly="True"/>
-                            <TextBlock Text="Toggle Yeeting HotKey" Style="{StaticResource InputLabel}"/>
-                            <TextBox Style="{StaticResource Input}" Text="{Binding Path=Settings.YeetHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleYeetHotKeyTextBox_KeyDown" IsReadOnly="True"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </Border>
-            <Grid Grid.Row="1" Margin="10 3 6 3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="4"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="v1.2.3.4" Foreground="#345469"/>
-                <Rectangle Width="1"
-                           Stroke="{Binding Path=Theme.BorderColor}"
-                           Height="10"
-                           StrokeThickness="0.5"
-                           Grid.Column="1"
-                           />
-                <StackPanel Grid.Column="2"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Stretch"
-                            Orientation="Horizontal">
-                    <Grid Width="10"
-                          Height="10">
-                        <Ellipse Fill="#110000"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch">
-                            <Ellipse.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="4"
-                                    ShadowDepth="0"
-                                    Opacity="1"
-                                    RenderingBias="Quality"
-                                    Color="Red"/>
-                            </Ellipse.Effect>
-                        </Ellipse>
-                        <Ellipse Fill="#330000"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"
-                                 Margin="0.8">
-                            <Ellipse.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="1"
-                                    ShadowDepth="0"
-                                    Opacity="1"
-                                    RenderingBias="Quality"
-                                    Color="DarkRed"/>
-                            </Ellipse.Effect>
-                        </Ellipse>
-                        <Ellipse Fill="Red"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"
-                                 Margin="2"
-                                 Visibility="{Binding Recorder.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Ellipse.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="15"
-                                    ShadowDepth="0"
-                                    Opacity="1"
-                                    RenderingBias="Quality"
-                                    Color="White"/>
-                            </Ellipse.Effect>
-                        </Ellipse>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FlashAccentOpacity}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid ClipToBounds="False">
+        <Border Background="{Binding Theme.Background}"
+                CornerRadius="4"
+                ClipToBounds="True"
+                Margin="1.4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="24"/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="5 5 0 0">
+                    <Border.Clip>
+                        <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="CornerRadius" RelativeSource="{RelativeSource Self}"/>
+                        </MultiBinding>
+                    </Border.Clip>
+                    <Image x:Name="image_jpg"
+                           Source="Resources/Themes/Default/splash.png"
+                           Stretch="UniformToFill"
+                           Margin="300 -360 0 0"
+                           HorizontalAlignment="Left"
+                           Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay}"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Width="1200">
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="Image.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames AutoReverse="True"
+                                                                          RepeatBehavior="Forever"
+                                                                          Storyboard.TargetProperty="Margin"
+                                                                          >
+                                            <EasingThicknessKeyFrame KeyTime="00:00:16"
+                                                                     Value="-320 -400 0 0"
+                                                                     >
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <BackEase Amplitude="0.5" EasingMode="EaseInOut" />
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="00:00:24"
+                                                                     Value="-320 -360 0 0"
+                                                                     >
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="00:00:28"
+                                                                     Value="-600 -300 0 0"
+                                                                     >
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <BackEase Amplitude="0.5" EasingMode="EaseInOut" />
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="00:00:32"
+                                                                     Value="-600 -360 0 0"
+                                                                     >
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="00:00:40"
+                                                                     Value="-800 -360 0 0"
+                                                                     >
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </Border>
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10"/>
+                        <Border Grid.Row="1"
+                                Background="#AA040815"
+                                Margin="10 0 10 10"
+                                CornerRadius="2"
+                                Padding="10">
+                            <StackPanel>
+                                <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>
+                                <TextBox x:Name="ToggleRecordingHotkeyTextBox" Text="{Binding Path=Settings.RecordHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleRecordHotKeyTextBox_KeyDown" IsReadOnly="True"/>
+                                <TextBlock Text="Toggle Yeeting HotKey" Style="{StaticResource InputLabel}"/>
+                                <TextBox x:Name="ToggleYeetingHotkeyTextBox" Text="{Binding Path=Settings.YeetHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleYeetHotKeyTextBox_KeyDown" IsReadOnly="True"/>
+                            </StackPanel>
+                        </Border>
                     </Grid>
-                </StackPanel>
+                </Border>
+                <Grid Grid.Row="1" Margin="10 3 6 3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="v1.2.3.4" Foreground="#345469"/>
+                    <Rectangle Width="1"
+                               Stroke="{Binding Path=Theme.BorderColor}"
+                               Height="10"
+                               StrokeThickness="0.5"
+                               Grid.Column="1"
+                               />
+                    <StackPanel Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Stretch"
+                                Orientation="Horizontal">
+                        <Grid Width="10"
+                              Height="10">
+                            <Ellipse Fill="#110000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="4"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="Red"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+                            <Ellipse Fill="#330000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Margin="0.8">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="1"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="DarkRed"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+                            <Ellipse Fill="Red"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Margin="2"
+                                     Visibility="{Binding Recorder.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="15"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="White"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </Grid>
-    </Border>
+        </Border>
+        <Border
+            Style="{StaticResource AccentBorder}"
+            Background="{Binding Theme.Border}"
+            Panel.ZIndex="-1">
+        </Border>
+    </Grid>
 </Window>

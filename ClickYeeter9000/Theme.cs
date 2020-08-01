@@ -33,7 +33,9 @@ namespace ClickYeeter9000
         public Theme(DirectoryInfo path) {
             _path = path ?? throw new ArgumentNullException(nameof(path));
 
-            BorderColor = Color.FromArgb(255, 137, 213, 255);
+            //Blue
+            //BorderColor = Color.FromArgb(255, 137, 213, 255);
+            BorderColor = Color.FromArgb(255, 255, 0, 0);
             Border = new SolidColorBrush(BorderColor);
         }
 

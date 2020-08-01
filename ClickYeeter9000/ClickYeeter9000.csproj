@@ -130,6 +130,7 @@
     <Compile Include="Components\IEvent.cs" />
     <Compile Include="Components\Events\MouseDoubleClickEvent.cs" />
     <Compile Include="Components\Record.cs" />
+    <Compile Include="Converters\BorderClipConverter.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Components\Recorder.cs" />
@@ -153,6 +154,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Themes\Default\DefaultTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
