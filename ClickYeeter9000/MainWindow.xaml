@@ -150,47 +150,169 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Stretch"
                                 Orientation="Horizontal">
-                        <Grid Width="10"
-                              Height="10">
-                            <Ellipse Fill="#110000"
+                        <Grid Width="10" Height="10">
+                            <Grid>
+                                <Ellipse Fill="#111111"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch">
-                                <Ellipse.Effect>
-                                    <DropShadowEffect
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
                                         BlurRadius="4"
                                         ShadowDepth="0"
                                         Opacity="1"
                                         RenderingBias="Quality"
-                                        Color="Red"/>
-                                </Ellipse.Effect>
-                            </Ellipse>
-                            <Ellipse Fill="#330000"
+                                        Color="Gray"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Ellipse Fill="#333333"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch"
                                      Margin="0.8">
-                                <Ellipse.Effect>
-                                    <DropShadowEffect
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
                                         BlurRadius="1"
                                         ShadowDepth="0"
                                         Opacity="1"
                                         RenderingBias="Quality"
-                                        Color="DarkRed"/>
-                                </Ellipse.Effect>
-                            </Ellipse>
-                            <Ellipse Fill="Red"
+                                        Color="DarkGray"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Grid>
+                            <Grid Visibility="{Binding Player.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Setter Property="Opacity" Value="0.4"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Player.IsEnabled}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                                                           BeginTime="0:0:0" AutoReverse="False"
+                                                                                           RepeatBehavior="Forever">
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0.4">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.6">
+                                                                </EasingDoubleKeyFrame>
+                                                            </DoubleAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Ellipse Fill="#001100"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
+                                        BlurRadius="4"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="Green"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Ellipse Fill="#003300"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch"
-                                     Margin="2"
-                                     Visibility="{Binding Recorder.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Ellipse.Effect>
-                                    <DropShadowEffect
+                                     Margin="0.8">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
+                                        BlurRadius="1"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="DarkGreen"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Ellipse Fill="Green"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Margin="2">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
                                         BlurRadius="15"
                                         ShadowDepth="0"
                                         Opacity="1"
                                         RenderingBias="Quality"
                                         Color="White"/>
-                                </Ellipse.Effect>
-                            </Ellipse>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Grid>
+                            <Grid Visibility="{Binding Recorder.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Setter Property="Opacity" Value="0.4"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Recorder.IsEnabled}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                                                           BeginTime="0:0:0" AutoReverse="False"
+                                                                                           RepeatBehavior="Forever">
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0.4">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                                                                </EasingDoubleKeyFrame>
+                                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.6">
+                                                                </EasingDoubleKeyFrame>
+                                                            </DoubleAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Ellipse Fill="#110000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
+                                        BlurRadius="4"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="Red"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Ellipse Fill="#330000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Margin="0.8">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
+                                        BlurRadius="1"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="DarkRed"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Ellipse Fill="Red"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Margin="2"
+                                         >
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect
+                                        BlurRadius="15"
+                                        ShadowDepth="0"
+                                        Opacity="1"
+                                        RenderingBias="Quality"
+                                        Color="White"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Grid>
                         </Grid>
                     </StackPanel>
                 </Grid>

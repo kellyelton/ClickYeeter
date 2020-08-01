@@ -18,7 +18,8 @@ namespace ClickYeeter9000
 
         private readonly IKeyboardMouseEvents _hook;
 
-        private YeetOverlay _overlay;
+        private YeetOverlay _playOverlay;
+        private YeetOverlay _recordOverlay;
 
         private readonly static KeysConverter _keysConverter = new KeysConverter();
 
@@ -81,12 +82,12 @@ namespace ClickYeeter9000
         private void Player_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName == nameof(ClickYeeter.Player.IsEnabled)) {
                 if (ClickYeeter.Player.IsEnabled) {
-                    var overlay = _overlay = new YeetOverlay();
+                    var overlay = _playOverlay = new YeetOverlay();
                     overlay.Show();
                 } else {
-                    _overlay.Close();
+                    _playOverlay.Close();
 
-                    _overlay = null;
+                    _playOverlay = null;
                 }
             }
         }
@@ -94,12 +95,12 @@ namespace ClickYeeter9000
         private void Recorder_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName == nameof(ClickYeeter.Recorder.IsEnabled)) {
                 if (ClickYeeter.Recorder.IsEnabled) {
-                    var overlay = _overlay = new YeetOverlay();
+                    var overlay = _recordOverlay = new YeetOverlay();
                     overlay.Show();
                 } else {
-                    _overlay.Close();
+                    _recordOverlay.Close();
 
-                    _overlay = null;
+                    _recordOverlay = null;
                 }
             }
         }
