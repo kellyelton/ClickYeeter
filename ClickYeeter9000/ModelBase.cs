@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace ClickYeeter9000
 {
@@ -9,9 +8,7 @@ namespace ClickYeeter9000
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify([CallerMemberName]string property = null) {
-            _ = Application.Current.Dispatcher.InvokeAsync(() => {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-            });
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         protected bool SetAndNotify<T>(ref T field, T value, [CallerMemberName]string property = null) {
