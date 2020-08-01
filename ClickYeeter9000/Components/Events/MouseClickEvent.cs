@@ -21,5 +21,23 @@ namespace ClickYeeter9000.Components.Events
             Y = y;
             Time = time;
         }
+
+        public void Run() {
+            Mouse.SetCursorPosition(X, Y);
+
+            if (Button == MouseButtons.Left) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftUp);
+            } else if(Button == MouseButtons.Right) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightUp);
+            } else if(Button == MouseButtons.Middle) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleUp);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ClickYeeter9000.Components
@@ -20,6 +21,40 @@ namespace ClickYeeter9000.Components
             X = x;
             Y = y;
             Time = time;
+        }
+
+        public void Run() {
+            Mouse.SetCursorPosition(X, Y);
+
+            if (Button == MouseButtons.Left) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftUp);
+            } else if(Button == MouseButtons.Right) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightUp);
+            } else if(Button == MouseButtons.Middle) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleUp);
+            }
+
+            Thread.Sleep(5);
+
+            if (Button == MouseButtons.Left) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.LeftUp);
+            } else if(Button == MouseButtons.Right) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.RightUp);
+            } else if(Button == MouseButtons.Middle) {
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleDown);
+
+                Mouse.MouseEvent(Mouse.MouseEventFlags.MiddleUp);
+            }
         }
     }
 }

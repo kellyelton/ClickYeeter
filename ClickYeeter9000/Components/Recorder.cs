@@ -80,7 +80,7 @@ namespace ClickYeeter9000.Components
         }
 
         private void Hook_MouseDoubleClick(object sender, MouseEventArgs args) {
-            var eve = new MouseDoubleClickEvent(args.Button, args.X, args.Y, Record.GetTime());
+            var eve = new MouseClickEvent(args.Button, args.X, args.Y, Record.GetTime());
 
             Record.Events.Add(eve);
         }

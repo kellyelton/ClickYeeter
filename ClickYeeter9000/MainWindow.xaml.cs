@@ -37,7 +37,7 @@ namespace ClickYeeter9000
             _hook = Hook.GlobalEvents();
             _hook.KeyDown += Hook_KeyDown;
 
-            clickYeeter.PropertyChanged += ClickYeeter_PropertyChanged;
+            clickYeeter.Player.PropertyChanged += Player_PropertyChanged;
             clickYeeter.Recorder.PropertyChanged += Recorder_PropertyChanged;
         }
 
@@ -78,9 +78,9 @@ namespace ClickYeeter9000
             base.OnDeactivated(e);
         }
 
-        private void ClickYeeter_PropertyChanged(object sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName == nameof(ClickYeeter.IsEnabled)) {
-                if (ClickYeeter.IsEnabled) {
+        private void Player_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+            if (e.PropertyName == nameof(ClickYeeter.Player.IsEnabled)) {
+                if (ClickYeeter.Player.IsEnabled) {
                     var overlay = _overlay = new YeetOverlay();
                     overlay.Show();
                 } else {
@@ -114,7 +114,7 @@ namespace ClickYeeter9000
         private void ToggleYeeting() {
             Dispatcher.VerifyAccess();
 
-            ClickYeeter.IsEnabled = !ClickYeeter.IsEnabled;
+            ClickYeeter.Player.IsEnabled = !ClickYeeter.Player.IsEnabled;
         }
 
         private void ToggleRecording() {
@@ -127,7 +127,7 @@ namespace ClickYeeter9000
         }
 
         protected override void OnClosing(CancelEventArgs e) {
-            ClickYeeter.IsEnabled = false;
+            ClickYeeter.Player.IsEnabled = false;
             ClickYeeter.Recorder.IsEnabled = false;
 
             base.OnClosing(e);
