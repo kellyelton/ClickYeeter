@@ -1,5 +1,4 @@
-﻿//using GlobalHotKey;
-using Gma.System.MouseKeyHook;
+﻿using Gma.System.MouseKeyHook;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,11 +17,9 @@ namespace ClickYeeter9000
         public Theme Theme { get; }
 
         private readonly IKeyboardMouseEvents _hook;
-        //private readonly List<HotKey> _registereHotKeys = new List<HotKey>();
 
         private YeetOverlay _overlay;
 
-        private readonly static KeyConverter _keyConverter = new KeyConverter();
         private readonly static KeysConverter _keysConverter = new KeysConverter();
 
         [Obsolete("Used for the WPF designer only")]
@@ -39,7 +36,6 @@ namespace ClickYeeter9000
 
             _hook = Hook.GlobalEvents();
             _hook.KeyDown += Hook_KeyDown;
-            _hook.KeyUp += Hook_KeyUp;
 
             clickYeeter.PropertyChanged += ClickYeeter_PropertyChanged;
             clickYeeter.Recorder.PropertyChanged += Recorder_PropertyChanged;
@@ -115,18 +111,6 @@ namespace ClickYeeter9000
             base.OnMouseDown(e);
         }
 
-        private void EnableYeeting() {
-            Dispatcher.VerifyAccess();
-
-            ClickYeeter.IsEnabled = true;
-        }
-
-        private void DisableYeeting() {
-            Dispatcher.VerifyAccess();
-
-            ClickYeeter.IsEnabled = false;
-        }
-
         private void ToggleYeeting() {
             Dispatcher.VerifyAccess();
 
@@ -139,28 +123,12 @@ namespace ClickYeeter9000
             ClickYeeter.Recorder.IsEnabled = !ClickYeeter.Recorder.IsEnabled;
         }
 
-        //private void Manager_KeyPressed(object sender, KeyPressedEventArgs e) {
-        //    if(e.HotKey.Key == Key.F6) {
-        //        if (e.HotKey.Modifiers.HasFlag(ModifierKeys.Shift)) {
-        //            Dispatcher.InvokeAsync(ToggleRecording);
-        //        } else {
-        //            Dispatcher.InvokeAsync(ToggleYeeting);
-        //        }
-        //    }
-        //}
-
         private void _clickTimer_Elapsed(object sender, ElapsedEventArgs e) {
-            //Mouse.MouseEvent(Mouse.MouseEventFlags.LeftDown);
-
-            //Mouse.MouseEvent(Mouse.MouseEventFlags.LeftUp);
         }
 
         protected override void OnClosing(CancelEventArgs e) {
-            DisableYeeting();
-
-            //foreach (var hotkey in _registereHotKeys) {
-            //    _hotkeyManager.Unregister(hotkey);
-            //}
+            ClickYeeter.IsEnabled = false;
+            ClickYeeter.Recorder.IsEnabled = false;
 
             base.OnClosing(e);
         }
@@ -169,42 +137,6 @@ namespace ClickYeeter9000
             System.Windows.Application.Current.Shutdown();
 
             base.OnClosed(e);
-        }
-
-        private static string GetKeyString(System.Windows.Input.KeyEventArgs e) {
-            var keys = new List<string>();
-
-            {
-                var mods = Keyboard.Modifiers;
-
-                if (mods.HasFlag(ModifierKeys.Windows)) {
-                    keys.Add("WIN");
-                } else {
-                    if (mods.HasFlag(ModifierKeys.Control)) {
-                        keys.Add("CTRL");
-                    }
-
-                    if (mods.HasFlag(ModifierKeys.Shift)) {
-                        keys.Add("SHIFT");
-                    }
-
-                    if (mods.HasFlag(ModifierKeys.Alt)) {
-                        keys.Add("ALT");
-                    }
-                }
-            }
-
-            {
-                if (e.Key >= Key.LeftShift && e.Key <= Key.RightAlt) {
-                    return string.Empty;
-                } else if (e.Key == Key.LWin || e.Key == Key.RWin || e.Key == Key.System) {
-                    return string.Empty;
-                } else {
-                    keys.Add(_keyConverter.ConvertToString(e.Key));
-                }
-            }
-
-            return string.Join(" + ", keys);
         }
 
         private static string GetKeyString(System.Windows.Forms.KeyEventArgs e) {
@@ -268,22 +200,6 @@ namespace ClickYeeter9000
             } else if (keyString == yeetHotKey) {
                 ToggleYeeting();
             }
-        }
-
-        private void Hook_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e) {
-            //throw new NotImplementedException();
-        }
-
-        private void ToggleRecordHotKeyTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
-            var tb = (System.Windows.Controls.TextBox)sender;
-
-            //tb.Text = GetKeyString(e);
-        }
-
-        private void ToggleYeetHotKeyTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
-            var tb = (System.Windows.Controls.TextBox)sender;
-
-            //tb.Text = GetKeyString(e);
         }
     }
 }

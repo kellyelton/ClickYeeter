@@ -124,9 +124,9 @@
                                 Padding="10">
                             <StackPanel>
                                 <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>
-                                <TextBox x:Name="ToggleRecordingHotkeyTextBox" Text="{Binding Path=Settings.RecordHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleRecordHotKeyTextBox_KeyDown" IsReadOnly="True"/>
+                                <TextBox x:Name="ToggleRecordingHotkeyTextBox" Text="{Binding Path=Settings.RecordHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" IsReadOnly="True"/>
                                 <TextBlock Text="Toggle Yeeting HotKey" Style="{StaticResource InputLabel}"/>
-                                <TextBox x:Name="ToggleYeetingHotkeyTextBox" Text="{Binding Path=Settings.YeetHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" KeyDown="ToggleYeetHotKeyTextBox_KeyDown" IsReadOnly="True"/>
+                                <TextBox x:Name="ToggleYeetingHotkeyTextBox" Text="{Binding Path=Settings.YeetHotKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" IsReadOnly="True"/>
                             </StackPanel>
                         </Border>
                     </Grid>
