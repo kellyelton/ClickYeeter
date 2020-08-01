@@ -7,10 +7,14 @@
     <converters:DoubleBoosterConverter x:Key="DoubleBoosterConverter"/>
     <UIElement x:Key="OpacityAnimationHolder" Opacity="0.3"/>
     <Color x:Key="AccentColor">Red</Color>
+    <Color x:Key="BackgroundColor">#1D1E24</Color>
     <SolidColorBrush
         x:Key="BorderBrush"
         Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
         Color="{StaticResource AccentColor}" />
+    <SolidColorBrush
+        x:Key="BackgroundBrush"
+        Color="{StaticResource BackgroundColor}" />
 
     <Style x:Key="AccentBorder"
            TargetType="{x:Type controls:GlowBorder}"

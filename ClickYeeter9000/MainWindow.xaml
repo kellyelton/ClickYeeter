@@ -115,7 +115,24 @@
                             <RowDefinition Height="120"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="yeet_png" Source="Resources/Themes/Default/yeet2.png" Stretch="Uniform" Margin="10" Opacity="1"/>
+                        <Image x:Name="yeet_png"
+                               Source="Resources/Themes/Default/yeet2.png"
+                               Stretch="Uniform" Margin="10 10 10 10"
+                               />
+                        <Border
+                                Background="Transparent"
+                                CornerRadius="0 0 0 4"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <controls:ControlButton ControlText="X"
+                                                        Foreground="{StaticResource BackgroundBrush}"
+                                                        Accent="{StaticResource BorderBrush}"
+                                                        Click="CloseButton_Click"
+                                                        />
+                            </StackPanel>
+                        </Border>
                         <Border Grid.Row="1"
                                 Background="#AA020202"
                                 Margin="10 0 10 10"
@@ -160,14 +177,14 @@
                             <TextBlock.Triggers>
                                 <EventTrigger RoutedEvent="UIElement.MouseEnter">
                                     <EventTrigger.Actions>
-                                        <BeginStoryboard x:Name="StartHover">
+                                        <BeginStoryboard x:Name="StartHoverClose">
                                             <StaticResource ResourceKey="Hover"/>
                                         </BeginStoryboard>
                                     </EventTrigger.Actions>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="UIElement.MouseLeave">
                                     <EventTrigger.Actions>
-                                        <StopStoryboard BeginStoryboardName="StartHover"/>
+                                        <StopStoryboard BeginStoryboardName="StartHoverClose"/>
 
                                     </EventTrigger.Actions>
                                 </EventTrigger>
