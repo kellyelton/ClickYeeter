@@ -137,7 +137,7 @@
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="v1.2.3.4"
+                    <TextBlock Text="{Binding VersionString}"
                                Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
                                Foreground="#345469"/>
                     <Rectangle Width="1"

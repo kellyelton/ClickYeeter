@@ -18,6 +18,10 @@ namespace ClickYeeter9000
 
         public RecordPlayer Player { get; }
 
+        public Version Version{ get; }
+
+        public string VersionString { get; }
+
         private Theme _theme;
 
         private readonly DirectoryInfo _themesDirectory;
@@ -29,6 +33,10 @@ namespace ClickYeeter9000
             _themesDirectory = new DirectoryInfo(themesDirectory);
 
             if (!_themesDirectory.Exists) throw new DirectoryNotFoundException($"Path '{_themesDirectory.FullName}' does not exist.");
+
+            var ass = typeof(ClickYeeter).Assembly;
+            Version = ass.GetName().Version;
+            VersionString = $"v{Version} ⁞ Braden";
 
             Settings.PropertyChanged += Settings_PropertyChanged;
 
