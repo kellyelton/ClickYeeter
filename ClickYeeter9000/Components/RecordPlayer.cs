@@ -71,63 +71,66 @@ namespace ClickYeeter9000.Components
         Record _previousRecord;
         DateTime _startTime;
         int _lastEvent = -1;
-        bool _inClick;
+        bool _inTick;
         bool _isStarted;
 
         private void ClickTimerElapsed(object sender, ElapsedEventArgs e) {
             lock (_sync) {
+                if (_inTick) return;
+
                 if (!_isStarted) return;
 
                 _clickTimer.Enabled = false;
 
-                if (_inClick) return;
-
-                _inClick = true;
+                _inTick = true;
             }
 
-            var record = Record;
+            try {
 
-            if (record == null) {
-                _previousRecord = null;
+                var record = Record;
 
-                return;
-            }
+                if (record == null) {
+                    _previousRecord = null;
 
-            if (record != _previousRecord) {
-                _previousRecord = record;
+                    return;
+                }
 
-                // start over
-                _lastEvent = -1;
-                _startTime = DateTime.Now;
-            }
+                if (record != _previousRecord) {
+                    _previousRecord = record;
 
-            var startIndex = _lastEvent + 1;
+                    // start over
+                    _lastEvent = -1;
+                    _startTime = DateTime.Now;
+                }
 
-            if (startIndex >= record.Events.Count) {
-                startIndex = 0;
+                var startIndex = _lastEvent + 1;
 
-                // start over
-                _lastEvent = -1;
-                _startTime = DateTime.Now;
-            }
+                if (startIndex >= record.Events.Count) {
+                    startIndex = 0;
 
-            for (var i = startIndex; i < record.Events.Count; i++) {
-                var eve = record.Events[i];
+                    // start over
+                    _lastEvent = -1;
+                    _startTime = DateTime.Now;
+                }
 
-                var elapsed = (DateTime.Now - _startTime).TotalMilliseconds;
+                for (var i = startIndex; i < record.Events.Count; i++) {
+                    var eve = record.Events[i];
 
-                if (elapsed < eve.Time) break;
+                    var elapsed = (DateTime.Now - _startTime).TotalMilliseconds;
 
-                eve.Run();
+                    if (elapsed < eve.Time) break;
 
-                _lastEvent = i;
-            }
+                    eve.Run();
 
-            lock (_sync) {
-                _inClick = false;
+                    _lastEvent = i;
+                }
+            } finally {
+                lock (_sync) {
+                    _inTick = false;
 
-                if (_isStarted) {
-                    _clickTimer.Enabled = true;
+                    if (_isStarted) {
+                        _clickTimer.Enabled = true;
+                    }
                 }
             }
         }
