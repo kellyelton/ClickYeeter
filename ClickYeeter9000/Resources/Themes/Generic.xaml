@@ -10,6 +10,7 @@
         <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="BorderOpacity" Value="1"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBackground" Value="Blue"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:GlowBorder}">
@@ -41,6 +42,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
+                                Background="{TemplateBinding BorderBackground}"
                                 Opacity="{Binding BorderOpacity, RelativeSource={RelativeSource TemplatedParent}}"
                         >
                             <Border.Effect>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClickYeeter9000.Controls
 {
@@ -52,9 +53,16 @@ namespace ClickYeeter9000.Controls
             set { SetValue(BorderOpacityProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for BorderOpacity.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderOpacityProperty =
             DependencyProperty.Register("BorderOpacity", typeof(double), typeof(GlowBorder), new PropertyMetadata((double)1));
+
+        public Brush BorderBackground {
+            get { return (Brush)GetValue(BorderBackgroundProperty); }
+            set { SetValue(BorderBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty BorderBackgroundProperty =
+            DependencyProperty.Register("BorderBackground", typeof(Brush), typeof(GlowBorder), new PropertyMetadata(Brushes.Transparent));
 
         public GlowBorder() {
         }

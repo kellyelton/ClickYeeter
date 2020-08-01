@@ -16,6 +16,7 @@
            TargetType="{x:Type controls:GlowBorder}"
            BasedOn="{StaticResource {x:Type controls:GlowBorder}}">
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderBackground" Value="{StaticResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1.2"/>
         <Setter Property="CornerRadius" Value="5"/>
     </Style>
@@ -64,7 +65,8 @@
                     <controls:GlowBorder
                         x:Name="border"
                         Style="{StaticResource AccentBorder}"
-                        Background="{TemplateBinding Background}">
+                        Background="{TemplateBinding Background}"
+                        BorderBackground="Black">
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Focusable="False"

@@ -45,6 +45,7 @@
             x:Name="MainBorder"
             Style="{StaticResource AccentBorder}"
             Background="{Binding Theme.Background}"
+            BorderBackground="{StaticResource BorderBrush}"
             >
             <Grid>
                 <Grid.RowDefinitions>
