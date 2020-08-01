@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Timers;
+using System.Threading;
 
 namespace ClickYeeter9000.Components
 {
@@ -42,10 +41,10 @@ namespace ClickYeeter9000.Components
         private bool _isEnabled;
 
         private readonly object _sync = new object();
-        private readonly Timer _clickTimer = new Timer(5);
+        private readonly Timer _clickTimer;
 
         public RecordPlayer() {
-            _clickTimer.Elapsed += ClickTimerElapsed;
+            _clickTimer = new Timer(OnTick, this, Timeout.Infinite, Timeout.Infinite);
         }
 
         private void Start() {
@@ -54,7 +53,12 @@ namespace ClickYeeter9000.Components
 
                 _isStarted = true;
 
-                _clickTimer.Enabled = true;
+                if (!_isTicking) {
+                    _lastEvent = -1; // reset playback
+                    _startTime = DateTime.Now;
+
+                    QueueNextTick();
+                }
             }
         }
 
@@ -63,26 +67,20 @@ namespace ClickYeeter9000.Components
                 if (!_isStarted) return;
 
                 _isStarted = false;
-
-                _clickTimer.Enabled = false;
             }
         }
 
         Record _previousRecord;
         DateTime _startTime;
         int _lastEvent = -1;
-        bool _inTick;
         bool _isStarted;
+        bool _isTicking;
 
-        private void ClickTimerElapsed(object sender, ElapsedEventArgs e) {
+
+        private void OnTick(object state) {
             lock (_sync) {
-                if (_inTick) return;
-
                 if (!_isStarted) return;
-
-                _clickTimer.Enabled = false;
-
-                _inTick = true;
+                _isTicking = true;
             }
 
             try {
@@ -126,12 +124,18 @@ namespace ClickYeeter9000.Components
                 }
             } finally {
                 lock (_sync) {
-                    _inTick = false;
+                    _isTicking = false;
 
                     if (_isStarted) {
-                        _clickTimer.Enabled = true;
+                        QueueNextTick();
                     }
                 }
+            }
+        }
+
+        private void QueueNextTick() {
+            lock (_sync) {
+                _clickTimer.Change(25, Timeout.Infinite);
             }
         }
     }
