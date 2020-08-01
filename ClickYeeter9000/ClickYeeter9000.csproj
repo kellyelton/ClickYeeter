@@ -48,9 +48,6 @@
     <Reference Include="Eagle, Version=1.0.7213.50727, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
       <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7213.50727\lib\net40\Eagle.dll</HintPath>
     </Reference>
-    <Reference Include="GlobalHotKey, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GlobalHotKey.1.1.0\lib\GlobalHotKey.dll</HintPath>
-    </Reference>
     <Reference Include="Gma.System.MouseKeyHook, Version=5.6.130.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
     </Reference>

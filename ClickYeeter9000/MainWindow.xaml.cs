@@ -23,6 +23,7 @@ namespace ClickYeeter9000
         private YeetOverlay _overlay;
 
         private readonly static KeyConverter _keyConverter = new KeyConverter();
+        private readonly static KeysConverter _keysConverter = new KeysConverter();
 
         [Obsolete("Used for the WPF designer only")]
         public MainWindow() {
@@ -235,7 +236,7 @@ namespace ClickYeeter9000
                 } else if (e.KeyCode >= Keys.LWin && e.KeyCode <= Keys.Sleep) {
                     return string.Empty;
                 } else {
-                    keys.Add(_keyConverter.ConvertToString(e.KeyCode));
+                    keys.Add(_keysConverter.ConvertToString(e.KeyCode));
                 }
             }
 
@@ -243,12 +244,29 @@ namespace ClickYeeter9000
         }
 
         private void Hook_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
-            if (!this.IsActive) return;
+            var keyString = GetKeyString(e);
 
-            if (ToggleRecordingHotkeyTextBox.IsKeyboardFocusWithin) {
-                ToggleRecordingHotkeyTextBox.Text = GetKeyString(e);
-            } else if (ToggleYeetingHotkeyTextBox.IsKeyboardFocusWithin) {
-                ToggleYeetingHotkeyTextBox.Text = GetKeyString(e);
+            if (IsActive) {
+                // UIElement.OnKeyDown/up etc don't catch all keys
+                if (ToggleRecordingHotkeyTextBox.IsKeyboardFocusWithin) {
+                    ToggleRecordingHotkeyTextBox.Text = keyString;
+
+                    return;
+                } else if (ToggleYeetingHotkeyTextBox.IsKeyboardFocusWithin) {
+                    ToggleYeetingHotkeyTextBox.Text = keyString;
+
+                    return;
+                }
+            }
+
+            keyString = keyString.Replace(" ", "").ToLower();
+            var recordHotKey = ClickYeeter.Settings.RecordHotKey.Replace(" ", "").ToLower();
+            var yeetHotKey = ClickYeeter.Settings.YeetHotKey.Replace(" ", "").ToLower();
+
+            if (keyString == recordHotKey) {
+                ToggleRecording();
+            } else if (keyString == yeetHotKey) {
+                ToggleYeeting();
             }
         }
 
@@ -259,13 +277,13 @@ namespace ClickYeeter9000
         private void ToggleRecordHotKeyTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
             var tb = (System.Windows.Controls.TextBox)sender;
 
-            tb.Text = GetKeyString(e);
+            //tb.Text = GetKeyString(e);
         }
 
         private void ToggleYeetHotKeyTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
             var tb = (System.Windows.Controls.TextBox)sender;
 
-            tb.Text = GetKeyString(e);
+            //tb.Text = GetKeyString(e);
         }
     }
 }
