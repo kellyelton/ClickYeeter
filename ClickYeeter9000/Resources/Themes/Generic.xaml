@@ -67,4 +67,86 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type local:ControlButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ControlButton}">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <!--<VisualTransition GeneratedDuration="0:0:0.5"/>-->
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0"
+                                             Storyboard.TargetName="HoverBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0"
+                                             Storyboard.TargetName="StandardBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0.9"
+                                             Storyboard.TargetName="MouseDownBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="1"
+                                             Storyboard.TargetName="ControlTextBlock"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Hover">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0.9"
+                                             Storyboard.TargetName="HoverBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0"
+                                             Storyboard.TargetName="StandardBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="0"
+                                             Storyboard.TargetName="MouseDownBorder"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                             To="1"
+                                             Storyboard.TargetName="ControlTextBlock"
+                                             Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border Background="{TemplateBinding Background}"
+                                Name="StandardBorder"
+                                Opacity="0.8"
+                                CornerRadius="0 3 0 3"
+                                />
+                        <Border Background="{Binding HoverBackground, RelativeSource={RelativeSource AncestorType=local:ControlButton}}"
+                                Name="HoverBorder"
+                                Opacity="0"
+                                CornerRadius="0 3 0 3"
+                                />
+                        <Border Background="{Binding MouseDownBackground, RelativeSource={RelativeSource AncestorType=local:ControlButton}}"
+                                Name="MouseDownBorder"
+                                Opacity="0"
+                                CornerRadius="0 3 0 3"
+                                />
+
+                        <TextBlock Name="ControlTextBlock"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Opacity="0.4"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:ControlButton}}"
+                                   Text="{Binding ControlText, RelativeSource={RelativeSource AncestorType=local:ControlButton, Mode=FindAncestor}}"
+                                   FontWeight="Bold"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

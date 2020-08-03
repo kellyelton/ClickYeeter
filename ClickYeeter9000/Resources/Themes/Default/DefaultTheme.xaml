@@ -7,11 +7,16 @@
     <converters:DoubleBoosterConverter x:Key="DoubleBoosterConverter"/>
     <UIElement x:Key="OpacityAnimationHolder" Opacity="0.3"/>
     <Color x:Key="AccentColor">Red</Color>
+    <Color x:Key="DarkAccentColor">DarkRed</Color>
     <Color x:Key="BackgroundColor">#1D1E24</Color>
     <SolidColorBrush
-        x:Key="BorderBrush"
+        x:Key="AccentBrush"
         Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
         Color="{StaticResource AccentColor}" />
+    <SolidColorBrush
+        x:Key="DarkAccentBrush"
+        Opacity="{Binding Source={StaticResource OpacityAnimationHolder}, Path=Opacity, Mode=OneWay, Converter={StaticResource DoubleBoosterConverter}, ConverterParameter=0.5}"
+        Color="{StaticResource DarkAccentColor}" />
     <SolidColorBrush
         x:Key="BackgroundBrush"
         Color="{StaticResource BackgroundColor}" />
@@ -19,8 +24,8 @@
     <Style x:Key="AccentBorder"
            TargetType="{x:Type controls:GlowBorder}"
            BasedOn="{StaticResource {x:Type controls:GlowBorder}}">
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="BorderBackground" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="BorderBackground" Value="{StaticResource AccentBrush}"/>
         <Setter Property="BorderThickness" Value="1.2"/>
         <Setter Property="CornerRadius" Value="5"/>
     </Style>
@@ -91,7 +96,7 @@
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="FontWeight" Value="Normal"/>
-                            <Setter Property="CaretBrush" Value="{StaticResource BorderBrush}"/>
+                            <Setter Property="CaretBrush" Value="{StaticResource AccentBrush}"/>
                             <Setter Property="IsReadOnlyCaretVisible" Value="True"/>
                             <Setter Property="Foreground" Value="#DBDBE3"/>
                             <Setter Property="Background" Value="#220000"/>
@@ -100,5 +105,16 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="controls:ControlButton"
+           BasedOn="{StaticResource {x:Type controls:ControlButton}}"
+           >
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="Background" Value="#441111"/>
+        <Setter Property="HoverBackground" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="MouseDownBackground" Value="{StaticResource DarkAccentBrush}"/>
     </Style>
 </ResourceDictionary>

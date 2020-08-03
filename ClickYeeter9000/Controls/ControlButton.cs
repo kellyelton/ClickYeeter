@@ -6,15 +6,27 @@ using System.Windows.Media;
 
 namespace ClickYeeter9000.Controls
 {
-    public partial class ControlButton : UserControl
+    public partial class ControlButton : Control
     {
-        public Brush Accent {
-            get { return (Brush)GetValue(AccentProperty); }
-            set { SetValue(AccentProperty, value); }
+        static ControlButton() {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ControlButton), new FrameworkPropertyMetadata(typeof(ControlButton)));
         }
 
-        public static readonly DependencyProperty AccentProperty =
-            DependencyProperty.Register("Accent", typeof(Brush), typeof(ControlButton), new PropertyMetadata(Brushes.White));
+        public Brush HoverBackground {
+            get { return (Brush)GetValue(HoverBackgroundProperty); }
+            set { SetValue(HoverBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty HoverBackgroundProperty =
+            DependencyProperty.Register(nameof(HoverBackground), typeof(Brush), typeof(ControlButton), new PropertyMetadata(Brushes.White));
+
+        public Brush MouseDownBackground {
+            get { return (Brush)GetValue(MouseDownBackgroundProperty); }
+            set { SetValue(MouseDownBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty MouseDownBackgroundProperty =
+            DependencyProperty.Register(nameof(MouseDownBackground), typeof(Brush), typeof(ControlButton), new PropertyMetadata(Brushes.DarkGray));
 
         public string ControlText {
             get { return (string)GetValue(ControlTextProperty); }
@@ -35,7 +47,9 @@ namespace ClickYeeter9000.Controls
         private bool _didMouseDown;
 
         public ControlButton() {
-            InitializeComponent();
+            IsHitTestVisible = true;
+            MouseEnter += (s, e) => VisualStateManager.GoToState(this, "Hover", false);
+            MouseLeave += (s, e) => VisualStateManager.GoToState(this, "Normal", false);
         }
 
         void RaiseClickEvent() {
@@ -46,7 +60,9 @@ namespace ClickYeeter9000.Controls
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e) {
+            e.Handled = true;
             _didMouseDown = true;
+            VisualStateManager.GoToState(this, "Pressed", false);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e) {
@@ -62,3 +78,4 @@ namespace ClickYeeter9000.Controls
         protected virtual void OnClick() { }
     }
 }
+

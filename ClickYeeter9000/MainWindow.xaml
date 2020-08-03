@@ -45,7 +45,7 @@
             Margin="5"
             Style="{StaticResource AccentBorder}"
             Background="{Binding Theme.Background}"
-            BorderBackground="{StaticResource BorderBrush}"
+            BorderBackground="{StaticResource AccentBrush}"
             >
             <Grid>
                 <Grid.RowDefinitions>
@@ -127,8 +127,6 @@
                                 Padding="5">
                             <StackPanel Orientation="Horizontal">
                                 <controls:ControlButton ControlText="X"
-                                                        Foreground="{StaticResource BackgroundBrush}"
-                                                        Accent="{StaticResource BorderBrush}"
                                                         Click="CloseButton_Click"
                                                         />
                             </StackPanel>
