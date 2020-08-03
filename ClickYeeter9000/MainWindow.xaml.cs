@@ -49,7 +49,7 @@ namespace ClickYeeter9000
             _fadeBorderOutStoryboard?.Stop();
 
             var sb = new Storyboard();
-            var anim = new DoubleAnimation(0.2, 1, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
+            var anim = new DoubleAnimation(0.1, 0.6, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
             sb.Children.Add(anim);
 
             Storyboard.SetTarget(sb, MainBorder);
@@ -66,7 +66,7 @@ namespace ClickYeeter9000
             _fadeBorderInStoryboard?.Stop();
 
             var sb = new Storyboard();
-            var anim = new DoubleAnimation(1, 0.2, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
+            var anim = new DoubleAnimation(0.6, 0.1, TimeSpan.FromSeconds(0.25), FillBehavior.HoldEnd);
             sb.Children.Add(anim);
 
             Storyboard.SetTarget(sb, MainBorder);

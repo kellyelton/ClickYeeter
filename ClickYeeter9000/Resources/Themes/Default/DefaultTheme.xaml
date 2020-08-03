@@ -42,7 +42,7 @@
             </EasingDoubleKeyFrame>
             <EasingDoubleKeyFrame KeyTime="00:00:07.25" Value="0.05">
             </EasingDoubleKeyFrame>
-            <EasingDoubleKeyFrame KeyTime="00:00:8" Value="0.5">
+            <EasingDoubleKeyFrame KeyTime="00:00:8" Value="0.6">
                 <EasingDoubleKeyFrame.EasingFunction>
                     <BounceEase EasingMode="EaseInOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
@@ -51,7 +51,7 @@
             </EasingDoubleKeyFrame>
             <EasingDoubleKeyFrame KeyTime="00:00:11.25" Value="0.00">
             </EasingDoubleKeyFrame>
-            <EasingDoubleKeyFrame KeyTime="00:00:12" Value="0.7">
+            <EasingDoubleKeyFrame KeyTime="00:00:12" Value="0.8">
                 <EasingDoubleKeyFrame.EasingFunction>
                     <BounceEase EasingMode="EaseInOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
