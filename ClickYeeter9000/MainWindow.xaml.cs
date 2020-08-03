@@ -208,5 +208,30 @@ namespace ClickYeeter9000
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
             Close();
         }
+
+        private bool _optionsToggle;
+
+        private void TextBlock_MouseUp(object sender, MouseButtonEventArgs e) {
+            var sb = (Storyboard)FindResource("ExpandWindowStoryboard");
+            var sbClose = (Storyboard)FindResource("CollapseWindowStoryboard");
+
+            if (!_optionsToggle) {
+                sbClose.Stop();
+                sbClose.Seek(TimeSpan.Zero);
+                sb.Begin();
+
+                _optionsToggle = true;
+            } else {
+                sb.Stop();
+                sb.Seek(TimeSpan.Zero);
+                sbClose.Begin();
+
+                _optionsToggle = false;
+            }
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e) {
+            e.Handled = true;
+        }
     }
 }

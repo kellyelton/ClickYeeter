@@ -15,6 +15,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
+        x:Name="thisMainWindow"
         >
     <Window.Resources>
         <Style x:Key="InputLabel" TargetType="TextBlock">
@@ -32,6 +33,18 @@
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:BorderClipConverter x:Key="BorderClipConverter"/>
+        <Storyboard x:Key="ExpandWindowStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="(Window.Height)"
+                             Storyboard.TargetName="thisMainWindow"
+                             Duration="0:0:0.3"
+                             From="170" To="400"/>
+        </Storyboard>
+        <Storyboard x:Key="CollapseWindowStoryboard" Duration="0:0:0.3">
+            <DoubleAnimation Storyboard.TargetProperty="(Window.Height)"
+                             Storyboard.TargetName="thisMainWindow"
+                             Duration="0:0:0.3"
+                             From="400" To="170"/>
+        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -135,7 +148,6 @@
                                 Background="#AA020202"
                                 Margin="10 0 10 10"
                                 CornerRadius="4"
-                                Visibility="Collapsed"
                                 Padding="10">
                             <StackPanel>
                                 <TextBlock Text="Toggle Recording HotKey" Style="{StaticResource InputLabel}"/>
@@ -165,7 +177,7 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Stretch"
                                 Orientation="Horizontal">
-                        <TextBlock Text="⚙️" Foreground="#333333" FontSize="12" Margin="0 -1 10 0" Cursor="Hand">
+                        <TextBlock IsHitTestVisible="True" Text="⚙️" Foreground="#333333" FontSize="12" Margin="0 -1 10 0" Cursor="Hand" MouseUp="TextBlock_MouseUp" MouseDown="TextBlock_MouseDown">
                             <TextBlock.Resources>
                                 <Storyboard x:Key="Hover">
                                     <ColorAnimation From="#333333" To="#47C3FF" Duration="00:00:0.25" FillBehavior="HoldEnd" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
